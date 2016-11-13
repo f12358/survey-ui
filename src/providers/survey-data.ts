@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 /*
   Generated class for the SurveyData provider.
@@ -11,8 +13,20 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class SurveyData {
 
+  private surveyUrl: string;
+
   constructor(public http: Http) {
-    console.log('Hello SurveyData Provider');
+    //console.log('Hello SurveyData Provider');
+    this.surveyUrl = 'http://localhost:5000/api/survey';
   }
 
+  // Fetch all existing surveys
+  getSurveys() : Observable<any[]> {
+    // ...using get request
+    return this.http.get(this.surveyUrl)
+    // ...and calling .json() on the response to return data
+      .map((res:Response) => res.json())
+      //...errors if any
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
