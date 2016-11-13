@@ -15,7 +15,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
   rootPage: any = HomePage;
-  pages: Array<{title: string, component: any}>;
   surveys: any;
 
   constructor(
@@ -25,11 +24,6 @@ export class MyApp {
   ) {
     this.initializeApp();
 
-    console.log('hello');
-
-    this.pages = [
-      { title: 'Home', component: HomePage }
-    ];    
   }
 
   initializeApp() {
@@ -38,7 +32,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      //this.loadSurveys();
     });
   }
 
@@ -55,14 +48,12 @@ export class MyApp {
     this.nav.setRoot(HomePage);
   }
 
-
   renderSurvey(survey) {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    //this.nav.setRoot(SurveyPage);
 
     this.nav.push(SurveyPage,{
-      survey: survey,
+      survey: survey
     });
   }
 }

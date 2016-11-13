@@ -5,14 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>survey</ion-title>
+    <ion-title>{{survey.name}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-  {{survey.name}}
+  <ion-card text-wrap *ngFor="let q of survey.questions">
+    <ion-card-content>
+      <ion-item>
+        <ion-label>{{q.number}}.  {{q.text}}</ion-label>
+        <ion-select [(ngModel)]="q.selection">
+          <ion-option *ngFor="let o of q.options" value="{{o.id}}">{{o.id}}.  {{o.text}}</ion-option>
+        </ion-select>      
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
