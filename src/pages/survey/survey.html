@@ -10,6 +10,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+    <ion-list>
+      <ion-item>
+        <ion-label>Meeting Date</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="survey.meetingDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Meeting Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="survey.meetingTime"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
     <ion-card *ngIf="survey.offices" text-wrap>
       <ion-card-content>
         <ion-item>
@@ -20,7 +31,7 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
-
+    
     <ion-card *ngIf="survey.selectedOffice" text-wrap>
       <ion-card-content>
         <ion-item>
@@ -31,7 +42,7 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
-    
+
     <ion-card text-wrap *ngFor="let q of survey.questions">
       <ion-card-content>
         <ion-item>
