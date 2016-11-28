@@ -52,8 +52,12 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
 
-    this.nav.push(SurveyPage,{
-      survey: survey
-    });
+    this.surveyService.getSurvey(survey.id).subscribe(
+        data => {
+          this.nav.push(SurveyPage,{
+            survey: data
+          });
+        }
+    );
   }
 }

@@ -10,14 +10,37 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-card text-wrap *ngFor="let q of survey.questions">
-    <ion-card-content>
-      <ion-item>
-        <ion-label>{{q.number}}.  {{q.text}}</ion-label>
-        <ion-select [(ngModel)]="q.selection">
-          <ion-option *ngFor="let o of q.options" value="{{o.id}}">{{o.id}}.  {{o.text}}</ion-option>
-        </ion-select>      
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngIf="survey.offices" text-wrap>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Select Office</ion-label>
+          <ion-select [(ngModel)]="survey.selectedOffice">
+            <ion-option *ngFor="let o of survey.offices" [value]="o">{{o.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="survey.selectedOffice" text-wrap>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Select Room in {{survey.selectedOffice.name}}</ion-label>
+          <ion-select [(ngModel)]="survey.selectedRoom">
+            <ion-option *ngFor="let r of survey.selectedOffice.rooms">{{r}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card text-wrap *ngFor="let q of survey.questions">
+      <ion-card-content>
+        <ion-item>
+          <ion-label>{{q.number}}.  {{q.text}}</ion-label>
+          <ion-select [(ngModel)]="q.selection">
+            <ion-option *ngFor="let o of q.options" value="{{o.id}}">{{o.id}}.  {{o.text}}</ion-option>
+          </ion-select>      
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <button ion-button block>Submit</button>
 </ion-content>

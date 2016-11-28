@@ -29,4 +29,14 @@ export class SurveyData {
       //...errors if any
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  getSurvey(id: string) : Observable<any> {
+    // ...using get request
+    return this.http.get(this.surveyUrl + '/' + id)
+    // ...and calling .json() on the response to return data
+      .map((res:Response) => res.json())
+      //...errors if any
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 }
